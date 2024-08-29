@@ -1,0 +1,42 @@
+<form [formGroup]="userData"
+
+class="flex flex-col gap-5 w-1/4 mx-auto mt-24 border-2 p-5 border-gray-600">
+  <h1 class="text-center">Login</h1>
+  <div class="flex flex-col">
+    <label class="text-slate-400 text-sm" for="email">Email</label>
+    <input
+      formControlName="email"
+      type="email"
+      placeholder="email"
+      id="email"
+      required
+      class="rounded-sm text-sm border-transparent bg-slate-700 p-2 outline-none border focus:border-blue-500">
+    <div *ngIf="userData.controls['email'].invalid && (userData.controls['email'].dirty || userData.controls['email'].touched) "  class="text-red-500 text-xs mt-2">
+
+        <div *ngIf="userData.controls['email'].hasError('required')">
+          email is required
+        </div>
+        <div *ngIf="userData.controls['email'].hasError('email')">
+          Please enter a valid email address.
+        </div>
+    </div>
+  </div>
+  <div class="flex flex-col">
+    <label class="text-slate-400 text-sm" for="password">Password</label>
+    <input  formControlName="password" type="password" required placeholder="Password" id="password" class="rounded-sm text-sm border-transparent bg-slate-700 p-2 outline-none border focus:border-blue-500">
+    <div *ngIf="userData.controls['password'].invalid && (userData.controls['password'].dirty || userData.controls['password'].touched) "  class="text-red-500 text-xs mt-2">
+
+      <div *ngIf="userData.controls['password'].hasError('required')">
+        password is required
+      </div>
+      <div *ngIf="userData.controls['password'].hasError('minlength')">
+        Please enter a valid password.
+      </div>
+  </div>
+  </div>
+  <div class="flex gap-4 justify-end">
+    <button class=" bg-red-700 text-sm py-2 px-4 rounded-sm text-white transition-colors">Cancel</button>
+    <button (click)="onSubmit()" class=" bg-green-700 text-sm py-2 px-4 rounded-sm text-white transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"  [disabled]="!userData.valid" >Confirm</button>
+
+  </div>
+</form>
